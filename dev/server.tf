@@ -3,7 +3,7 @@ resource "digitalocean_tag" "do_tag" {
 }
 
 
-resource "digitalocean_droplet" "application" {
+resource "digitalocean_droplet" "application_app" {
   image = "rockylinux-9-x64"
   name = "application_A00937032"
   region = var.region
@@ -18,7 +18,7 @@ resource "digitalocean_droplet" "application" {
 }
 
 
-resource "digitalocean_droplet" "frontend" {
+resource "digitalocean_droplet" "frontend_app" {
   image = "rockylinux-9-x64"
   name = "frontend_A00937032"
   region = var.region
