@@ -1,0 +1,9 @@
+.terraform/
+*.tfstate
+*.tfstate.backup
+.env
+.terraform.lock.hcl
+do_token
+digocean.pem
+terraform.tfvars
+
