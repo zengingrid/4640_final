@@ -10,6 +10,6 @@ variable "region" {
 # The droplet count with default 2
 variable "droplet_count" {
   type = number
-  default = 2
+  default = 1
 }
 
