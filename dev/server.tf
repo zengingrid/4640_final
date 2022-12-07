@@ -5,7 +5,6 @@ resource "digitalocean_tag" "do_tag" {
 
 resource "digitalocean_droplet" "application" {
   image = "rockylinux-9-x64"
-  count = var.droplet_count
   name = "application_A00937032"
   region = var.region
   tags = [digitalocean_tag.do_tag.id]
@@ -21,7 +20,6 @@ resource "digitalocean_droplet" "application" {
 
 resource "digitalocean_droplet" "frontend" {
   image = "rockylinux-9-x64"
-  count = var.droplet_count
   name = "frontend_A00937032"
   region = var.region
   tags = [digitalocean_tag.do_tag.id]
