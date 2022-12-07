@@ -81,13 +81,13 @@ resource "digitalocean_firewall" "application_fw" {
     inbound_rule {
         protocol = "tcp"
         port_range = "1-65535"
-        source_dropletsource_droplet_ids = [digitalocean_droplet.frontend.id] 
+        source_droplet_ids = [digitalocean_droplet.frontend.id] 
     }
 
     inbound_rule {
         protocol = "udp"
         port_range = "1-65535"
-        source_dropletsource_droplet_ids = [digitalocean_droplet.frontend.id] 
+        source_droplet_ids = [digitalocean_droplet.frontend.id] 
     }
 
     inbound_rule {
