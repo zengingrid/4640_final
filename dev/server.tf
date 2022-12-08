@@ -35,7 +35,7 @@ resource "digitalocean_droplet" "frontend_app" {
 
 resource "digitalocean_project_resources" "project_attach" {
   project = data.digitalocean_project.lab_project.id
-  resources = flatten([digitalocean_droplet.frontend.urn, digitalocean_droplet.application.urn])
+  resources = flatten([digitalocean_droplet.frontend_app.urn, digitalocean_droplet.application_app.urn])
 }
 
 
