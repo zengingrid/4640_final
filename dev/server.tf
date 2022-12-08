@@ -5,7 +5,7 @@ resource "digitalocean_tag" "do_tag" {
 
 resource "digitalocean_droplet" "application_app" {
   image = "rockylinux-9-x64"
-  name = "application_A00937032"
+  name = "application-A00937032"
   region = var.region
   tags = [digitalocean_tag.do_tag.id]
   size = "s-1vcpu-512mb-10gb"
@@ -20,7 +20,7 @@ resource "digitalocean_droplet" "application_app" {
 
 resource "digitalocean_droplet" "frontend_app" {
   image = "rockylinux-9-x64"
-  name = "frontend_A00937032"
+  name = "frontend-A00937032"
   region = var.region
   tags = [digitalocean_tag.do_tag.id]
   size = "s-1vcpu-512mb-10gb"
