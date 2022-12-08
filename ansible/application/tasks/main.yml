@@ -1,2 +1,59 @@
 ---
-# tasks file for application
+- name: installing software
+  become: true
+  apt:
+    name:
+      - python3
+      - unzip
+      - python3-pip
+- name: adding backend user
+  become: true
+  user:
+    name: backend
+    home: /backend
+- name: copying file
+  become: true
+  copy:
+    src: ../src.zip
+    dest: /tmp
+- name: create tmp directory for source code
+  file:
+    path: /tmp/code
+    state: directory
+- name: unzip the code archive
+  unarchive:
+    src: /tmp/src.zip
+    dest: /tmp/code
+    remote_src: yes
+- name: create a directory for backend files
+  become: true
+  file:
+    path: /backend
+    state: directory
+    owner: "{{ ansible_ssh_user }}"
+- name: move backend folder to /backend
+  become: true
+  copy:
+    src: /tmp/code/app
+    dest: /backend
+    remote_src: yes
+- name: change the owner of /backend folder
+  become: true
+  file:
+    path: /backend
+    owner: backend
+    group: backend
+    recurse: true
+- name: install dependencies
+  become: true
+  become_user: backend
+  pip:
+    requirements: /backend/requirements.txt
+- name: run script
+  script: app.pys
+- name: create a text file
+  copy:
+    dest: "/backend/student.txt"
+    content: |
+      Xinyue Zeng
+      A00937032

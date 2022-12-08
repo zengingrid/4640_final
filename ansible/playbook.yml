@@ -1,0 +1,15 @@
+---
+- hosts: community.digitalocean.digitalocean
+  gather_facts: false
+  tasks:
+    - name: include role frontend
+      import_role: 
+        name: frontend
+      tags:
+        - InstanceRole
+
+    - name: include role application
+      import_role:
+        name: application
+      tags:
+        - InstanceRole

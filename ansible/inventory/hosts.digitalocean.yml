@@ -12,7 +12,8 @@ attributes:
     - tags
     - region
 groups:
-    webservers: "'Web' in (do_tags)"
+    webservers: "'frontend' in (do_tags)"
+    backend_servers: "'application' in (do_tags)"
 compose:
     ansible_host: do_networks.v4 | selectattr('type','eq','public')
       | map(attribute='ip_address') | first

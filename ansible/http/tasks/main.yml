@@ -1,2 +1,55 @@
 ---
-# tasks file for http
+- name: installing software
+  become: true
+  apt:
+    name:
+      - nginx
+      - unzip
+- name: adding frontend user
+  become: true
+  user:
+    name: frontend
+    home: /frontend
+- name: copying file
+  become: true
+  copy:
+    src: ../src.zip
+    dest: /tmp
+- name: create tmp directory for source code
+  file:
+    path: /tmp/code
+    state: directory
+- name: unzip the code archive
+  unarchive:
+    src: /tmp/src.zip
+    dest: /tmp/code
+    remote_src: yes
+- name: create a directory for frontend files
+  become: true
+  file:
+    path: /frontend
+    state: directory
+    owner: "{{ ansible_ssh_user }}"
+- name: move frontend folder to /frontend
+  become: true
+  copy:
+    src: /tmp/code/html
+    dest: /frontend
+    remote_src: yes
+- name: change the owner of /frontend folder
+  become: true
+  file:
+    path: /frontend
+    owner: frontend
+    group: frontend
+    recurse: true
+- name: copy nginx.conf to instance
+  become: true
+  copy:
+    src: files/nginx_default
+    dest: /etc/nginx/sites-available/default
+- name: restart nginx after making changes
+  become: true
+  systemd:
+    name: nginx
+    state: restarted
