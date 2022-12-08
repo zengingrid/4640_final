@@ -7,12 +7,16 @@ resource "digitalocean_tag" "frontend_tag" {
   name = "frontend"
 }
 
+resource "digitalocean_tag" "id_tag" {
+  name = "A00937032"
+}
+
 
 resource "digitalocean_droplet" "application_app" {
   image = var.image
   name = "application-A00937032"
   region = var.region
-  tags = [digitalocean_tag.application_tag.id]
+  tags = [digitalocean_tag.application_tag.id, digitalocean_tag.id_tag.id]
   size = "s-1vcpu-512mb-10gb"
   ssh_keys = [data.digitalocean_ssh_key.ssh_key.id]
   vpc_uuid = digitalocean_vpc.web_vpc.id
@@ -27,7 +31,7 @@ resource "digitalocean_droplet" "frontend_app" {
   image = var.image
   name = "frontend-A00937032"
   region = var.region
-  tags = [digitalocean_tag.frontend_tag.id]
+  tags = [digitalocean_tag.frontend_tag.id, digitalocean_tag.id_tag.id]
   size = "s-1vcpu-512mb-10gb"
   ssh_keys = [data.digitalocean_ssh_key.ssh_key.id]
   vpc_uuid = digitalocean_vpc.web_vpc.id
