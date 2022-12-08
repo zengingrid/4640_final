@@ -41,7 +41,7 @@ resource "digitalocean_project_resources" "project_attach" {
 
 resource "digitalocean_firewall" "frontend_fw" {   
     name = "frontend-firewall"                                 #
-    droplet_ids = [digitalocean_droplet.frontend.id]
+    droplet_ids = [digitalocean_droplet.frontend_app.id]
 
     inbound_rule {
         protocol         = "tcp"
@@ -70,7 +70,7 @@ resource "digitalocean_firewall" "frontend_fw" {
 
 resource "digitalocean_firewall" "application_fw" {   
     name = "application-firewall"                                 #
-    droplet_ids = [digitalocean_droplet.application.id]
+    droplet_ids = [digitalocean_droplet.application_app.id]
 
     inbound_rule {
         protocol         = "tcp"
@@ -81,13 +81,13 @@ resource "digitalocean_firewall" "application_fw" {
     inbound_rule {
         protocol = "tcp"
         port_range = "1-65535"
-        source_droplet_ids = [digitalocean_droplet.frontend.id] 
+        source_droplet_ids = [digitalocean_droplet.frontend_app.id] 
     }
 
     inbound_rule {
         protocol = "udp"
         port_range = "1-65535"
-        source_droplet_ids = [digitalocean_droplet.frontend.id] 
+        source_droplet_ids = [digitalocean_droplet.frontend_app.id] 
     }
 
     inbound_rule {
